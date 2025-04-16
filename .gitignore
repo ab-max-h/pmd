@@ -1,0 +1,5 @@
+# Entorno virtual
+.venv/
+# Byte-compiled
+__pycache__/
+*.py[cod]
