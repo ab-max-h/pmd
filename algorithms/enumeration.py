@@ -13,6 +13,9 @@ def calcular_vector_estacionario(P):
     return np.linalg.solve(A, b)
 
 def metodo_enumeracion(datos):
+    # Limpiar pantalla sin perder información
+    print("\n" * 10)
+
     problema_tipo = datos["problema_tipo"]
     n = datos["num_estados"]
     politicas = datos["politicas"]
