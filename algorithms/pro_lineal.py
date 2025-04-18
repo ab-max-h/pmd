@@ -2,7 +2,7 @@
 # algorithms/method_lp.py
 
 """
-Resolución de PMD por Programación Lineal (average-cost LP).
+Resolución de PMD por Programación Lineal.
 
 Formulación:
   Min (o Max) z = Σ_{i,j} c_{i,j} · y_{i,j}
