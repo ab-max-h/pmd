@@ -52,14 +52,14 @@ def metodo_programacion_lineal(datos):
                 # flujo de k->i bajo acción j
                 entradas.append(probs[j][k][i] * y[(k, j)])
         restr = lpSum(salidas) - lpSum(entradas) == 0
-        name = f"Restricción_{i}"
+        name = f"Restricción {i}"
         prob += restr, name
         restricciones.append((name, restr))
 
     # Restricción de normalización:
     norm = lpSum(y[(i, j)] for (i, j) in y) == 1
-    prob += norm, "normalization"
-    restricciones.append(("normalization", norm))
+    prob += norm, "Normalización"
+    restricciones.append(("Normalización", norm))
 
     # 1) Mostrar el PPL (manualmente)
     sentido_str = "Minimizar" if sentido == LpMinimize else "Maximizar"
@@ -76,7 +76,7 @@ def metodo_programacion_lineal(datos):
     print("\nVariables y_{i,j} ≥ 0:")
     # Listamos todas las variables, incluso si se quedan en cero
     for (i, j), var in y.items():
-        print(f"\t y_{i}_{j}")
+        print(f"\t y_{i}_{j} ≥ 0")
 
     # 2) Resolver
     prob.solve(PULP_CBC_CMD(msg=0))

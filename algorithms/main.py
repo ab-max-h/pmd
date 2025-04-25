@@ -5,6 +5,7 @@ from read import leer_datos_manualmente
 from enumeration import metodo_enumeracion
 from pro_lineal import metodo_programacion_lineal
 from pol_mejoradas import metodo_policy_improvement
+from pol_mejoradas import metodo_policy_improvement_desc
 
 
 def main():
@@ -16,6 +17,7 @@ def main():
         print("1) Enumeración Exhaustiva de Políticas")
         print("2) Programación Lineal")
         print("3) Mejoramiento de políticas")
+        print("4) Mejoramiento de políticas con descuento")
         print("Q) Salir")
         opc = input("Elige una opción: ").strip().lower()
 
@@ -25,6 +27,8 @@ def main():
             metodo_programacion_lineal(datos)
         elif opc == '3':
             metodo_policy_improvement(datos)
+        elif opc == '4':
+            metodo_policy_improvement_desc(datos)
         elif opc in ('q', 'salir'):
             print("¡Hasta luego!")
             break
