@@ -6,6 +6,7 @@ from enumeration import metodo_enumeracion
 from pro_lineal import metodo_programacion_lineal
 from pol_mejoradas import metodo_policy_improvement
 from pol_mejoradas import metodo_policy_improvement_desc
+from aproximaciones import metodo_value_iteration
 
 
 def main():
@@ -18,6 +19,7 @@ def main():
         print("2) Programación Lineal")
         print("3) Mejoramiento de políticas")
         print("4) Mejoramiento de políticas con descuento")
+        print("5) Aproximaciones sucesivas")
         print("Q) Salir")
         opc = input("Elige una opción: ").strip().lower()
 
@@ -29,6 +31,8 @@ def main():
             metodo_policy_improvement(datos)
         elif opc == '4':
             metodo_policy_improvement_desc(datos)
+        elif opc == '5':
+            metodo_value_iteration(datos)
         elif opc in ('q', 'salir'):
             print("¡Hasta luego!")
             break

@@ -18,6 +18,7 @@ import numpy as np
 from read import leer_datos_manualmente
 
 def evaluar_politica_sin_desc(pol, datos):
+    print("\n" * 10)
     """Evalúa la política SIN descuento (igual a tu evaluar_politica)."""
     n      = datos["num_estados"]
     probs  = datos["probabilidades"]
