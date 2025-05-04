@@ -19,9 +19,10 @@ la política π(i)=argmin_a[…], se muestra y se termina.
 
 import numpy as np
 from read import leer_datos_manualmente
+from lim_pant import limpiar_pantalla
 
 def metodo_value_iteration(datos):
-    print("\n" * 10)
+    limpiar_pantalla()
     problema_tipo = datos["problema_tipo"].lower()  # “maximizar” o “minimizar”
     n             = datos["num_estados"]
     politicas     = datos["politicas"]              # dict: acción→[estados]
@@ -100,3 +101,12 @@ def metodo_value_iteration(datos):
     print("Valores finales v*:")
     for i, vi in enumerate(v):
         print(f" v*_{i} = {vi:.6f}")
+
+    pfin = np.zeros((n, n))
+    for i, a in enumerate(pi):
+        pfin[i, :] = probs[a][i]
+    A = pfin.T - np.eye(n); A[-1, :] = 1.0
+    b = np.zeros(n); b[-1] = 1.0
+    pi_est = np.linalg.solve(A, b)
+    costo_medio = sum(pi_est[i] * costos[pi[i]][i] for i in range(n))
+    print(f"\nCosto medio E[C_(R)] = {costo_medio:.6f}")

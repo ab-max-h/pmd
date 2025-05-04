@@ -16,9 +16,10 @@ Contiene dos métodos:
 
 import numpy as np
 from read import leer_datos_manualmente
+from lim_pant import limpiar_pantalla
 
 def evaluar_politica_sin_desc(pol, datos):
-    print("\n" * 10)
+
     """Evalúa la política SIN descuento (igual a tu evaluar_politica)."""
     n      = datos["num_estados"]
     probs  = datos["probabilidades"]
@@ -55,6 +56,7 @@ def evaluar_politica_sin_desc(pol, datos):
     return g, v_signed
 
 def metodo_policy_improvement(datos):
+    limpiar_pantalla()
     """Mejoramiento de Políticas SIN descuento."""
     problema_tipo = datos["problema_tipo"].lower()
     n             = datos["num_estados"]
@@ -110,6 +112,14 @@ def metodo_policy_improvement(datos):
             print(f" g* = {g:.6f}")
             for i, vi in enumerate(v):
                 print(f" v*_{i} = {vi:.6f}")
+            pfin = np.zeros((n, n))
+            for i, a in enumerate(pol):
+                pfin[i, :] = probs[a][i]
+            A = pfin.T - np.eye(n); A[-1, :] = 1.0
+            b = np.zeros(n); b[-1] = 1.0
+            pi_est = np.linalg.solve(A, b)
+            costo_medio = sum(pi_est[i] * costos[pol[i]][i] for i in range(n))
+            print(f"\nCosto medio E[C_(R)] = {costo_medio:.6f}")
             break
         pol = nueva
 
@@ -130,6 +140,7 @@ def evaluar_politica_con_desc(pol, datos, alpha):
     return v
 
 def metodo_policy_improvement_desc(datos):
+    limpiar_pantalla()
     """Mejoramiento de Políticas CON descuento."""
     problema_tipo = datos["problema_tipo"].lower()
     n             = datos["num_estados"]
@@ -194,5 +205,13 @@ def metodo_policy_improvement_desc(datos):
             print("Valores finales v*: ")
             for i, vi in enumerate(v):
                 print(f" v*_{i} = {vi:.6f}")
+            pfin = np.zeros((n, n))
+            for i, a in enumerate(pol):
+                pfin[i, :] = probs[a][i]
+            A = pfin.T - np.eye(n); A[-1, :] = 1.0
+            b = np.zeros(n); b[-1] = 1.0
+            pi_est = np.linalg.solve(A,b)
+            costo_medio = sum(pi_est[i] * costos[pol[i]][i] for i in range(n))
+            print(f"\nCosto medio E[C_(R)] = {costo_medio:.6f}")
             break
         pol = nueva

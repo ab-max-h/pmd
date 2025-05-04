@@ -17,10 +17,10 @@ from pulp import (
     LpProblem, LpVariable, lpSum,
     LpStatus, LpMinimize, LpMaximize, PULP_CBC_CMD
 )
+from lim_pant import limpiar_pantalla
 
 def metodo_programacion_lineal(datos):
-    # Limpieza “suave” de pantalla
-    print("\n" * 10)
+    limpiar_pantalla()
 
     problema_tipo = datos["problema_tipo"]       # "Maximizar" o "Minimizar"
     n = datos["num_estados"]

@@ -3,6 +3,7 @@
 
 import numpy as np
 from itertools import product
+from lim_pant import limpiar_pantalla
 
 def calcular_vector_estacionario(P):
     n = P.shape[0]
@@ -13,9 +14,7 @@ def calcular_vector_estacionario(P):
     return np.linalg.solve(A, b)
 
 def metodo_enumeracion(datos):
-    # Limpiar pantalla sin perder información
-    print("\n" * 10)
-
+    limpiar_pantalla()
     problema_tipo = datos["problema_tipo"]
     n = datos["num_estados"]
     politicas = datos["politicas"]
